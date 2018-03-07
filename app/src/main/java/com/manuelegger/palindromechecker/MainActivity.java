@@ -1,5 +1,6 @@
 package com.manuelegger.palindromechecker;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,11 +29,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public String checkPalindrome (String palindrome) {
-        if(palindrome.equals(new StringBuilder(palindrome).reverse().toString())) {
-            return "Wow ein Palindrom :)";
+
+        //create toast parameters
+        Toast toast;
+        Context context = getApplicationContext();
+        CharSequence message = "";
+
+        //get lower case letters without spaces
+        palindrome = palindrome.toLowerCase().trim();
+
+        if(palindrome.isEmpty()) {
+            message = "Enter a word";
+        }
+        else if(palindrome.length() <= 5) {
+            message = "word must be longer than 5 characters";
+        }
+
+        if (message.toString() != "") {
+            toast = Toast.makeText(context, message, Toast.LENGTH_LONG);
+            toast.show();
         }
         else {
-            return "Leider ist es kein Palindrome :(";
+            if (palindrome.equals(new StringBuilder(palindrome).reverse().toString())) {
+                return "Wow ein Palindrom :)";
+            } else {
+                return "Leider ist es kein Palindrome :(";
+            }
         }
+        return "";
     }
 }
