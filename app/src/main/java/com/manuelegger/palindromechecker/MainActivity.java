@@ -15,16 +15,24 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button checkPalindrome = (Button) findViewById(R.id.buttonCheckPalindrome);
-        EditText input = (EditText) findViewById(R.id.editTextInput);
         final TextView output = (TextView) findViewById(R.id.textViewOutput);
+        final Button checkPalindrome = (Button) findViewById(R.id.buttonCheckPalindrome);
+        final EditText input = (EditText) findViewById(R.id.editTextInput);
 
         checkPalindrome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                output.setText("Button klicked");
+               output.setText(checkPalindrome(input.getText().toString()));
             }
         });
+    }
 
+    public String checkPalindrome (String palindrome) {
+        if(palindrome.equals(new StringBuilder(palindrome).reverse().toString())) {
+            return "Wow ein Palindrom :)";
+        }
+        else {
+            return "Leider ist es kein Palindrome :(";
+        }
     }
 }
